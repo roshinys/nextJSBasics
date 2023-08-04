@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const details = [
   { id: 1, name: "Yash", role: "Senior Developer" },
   { id: 2, name: "Vaibhav", role: "Backend Developer" },
@@ -7,9 +9,16 @@ const details = [
 export default function Author({ params }) {
   const developerId = params.developerId;
   const developer = details.filter((dev) => dev.id == developerId);
-  const developerName =
-    developer && developer.length > 0 && developer[0].name
-      ? developer[0].name
-      : "Dev not exist";
-  return <h1>{developerName}</h1>;
+  if (developer.length === 0) {
+    return <h1>Dev Not exist</h1>;
+  }
+  return (
+    <>
+      <h1>Name : {developer[0].name}</h1>
+      <p>Role : {developer[0].role}</p>
+      <p>
+        <Link href="/aboutus">Go Back</Link>
+      </p>
+    </>
+  );
 }
